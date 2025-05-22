@@ -14,7 +14,7 @@ PushGuard is a lightweight VS Code extension that helps prevent you from acciden
 
 ## 📸 Preview
 
-Coming soon! (Add a GIF or screenshot of the warning prompt here)
+![PushGuard Screenshot](https://github.com/user-attachments/assets/95c204ff-e001-42fa-a24d-6609b1ebd746)
 
 ## ⚙️ Requirements
 
