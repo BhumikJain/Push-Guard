@@ -1,8 +1,11 @@
 {
+  "publisher": "BhumikJain",
   "name": "push-guard",
   "displayName": "Push Guard",
   "description": "Guards against losing code by reminding users to push before closing VS Code",
   "version": "0.0.1",
+  "icon": "images/icon.png",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -21,26 +24,30 @@
   "contributes": {
     "commands": [
       {
-        "command": "git-push-reminder.disable",
-        "title": "Disable Git Push Reminder"
+        "command": "github-push-reminder.checkGitStatus",
+        "title": "Check Git Status and Push to GitHub"
       },
       {
-        "command": "git-push-reminder.enable",
-        "title": "Enable Git Push Reminder"
+        "command": "github-push-reminder.beforeClose",
+        "title": "Check Git Status Before Closing"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "github-push-reminder.beforeClose",
+        "key": "alt+f4",
+        "win": "alt+f4",
+        "mac": "cmd+q",
+        "when": "editorTextFocus"
       }
     ],
     "configuration": {
-      "title": "Git Push Reminder",
+      "title": "GitHub Push Reminder",
       "properties": {
-        "gitPushReminder.enabled": {
+        "github-push-reminder.checkOnSave": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable git push reminders"
-        },
-        "gitPushReminder.checkInterval": {
-          "type": "number",
-          "default": 30,
-          "description": "How often to check for uncommitted changes (in seconds)"
+          "description": "Check for unpushed changes when saving files (helps detect when VS Code is closing)"
         }
       }
     }
