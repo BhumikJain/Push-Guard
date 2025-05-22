@@ -1,16 +1,17 @@
 {
-  "name": "git-push-reminder",
-  "displayName": "Git Push Reminder",
-  "description": "Reminds users to push code before closing VS Code",
+  "name": "push-guard",
+  "displayName": "Push Guard",
+  "description": "Guards against losing code by reminding users to push before closing VS Code",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.74.0"
   },
   "categories": [
-    "Other"
+    "SCM Providers"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "workspaceContains:.git"
   ],
   "repository": {
     "type": "git",
