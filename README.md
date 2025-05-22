@@ -1,16 +1,39 @@
 # PushGuard
 
-PushGuard is a lightweight VS Code extension that helps prevent you from accidentally closing your editor with uncommitted or unpushed Git changes. It provides a simple reminder and a direct way to commit and push your changes — right from within the editor.
+PushGuard is an intelligent VS Code extension that helps prevent you from losing your work by tracking your coding progress and reminding you to commit and push your Git changes. It actively monitors your code modifications and provides smart notifications to keep your work secure.
 
 ## 🚀 Features
 
-- 🔔 **Push Reminder**: Warns you when uncommitted or unpushed changes are detected in your workspace.
-- 📝 **Commit Prompt**: Asks for a commit message and runs `git add`, `git commit`, and `git push` automatically.
-- ✅ **Quick Push Option**: Push directly from the warning dialog without opening the terminal.
-- ❌ **Dismiss Option**: Dismiss the warning if you're not ready to push — without blocking VS Code shutdown.
-- 💡 **Lightweight and non-intrusive**: No background processes, just smart hooks at the right moments.
+### Smart Code Tracking
+- 📊 **Line Change Counter**: Tracks the number of lines you've modified across multiple files
+- ⏱️ **Session Time Tracking**: Monitors how long you've been coding and when you reach milestones
+- 📁 **Multi-File Support**: Tracks changes across all supported code file types
+- 🎯 **30-Line Milestone**: Celebrates when you've made substantial progress and activates push notifications
 
-> Note: Due to VS Code API limitations, the extension cannot block window shutdown directly. Instead, PushGuard triggers warnings based on file saves, command invocations, or periodically.
+### Intelligent Push Reminders
+- 🔔 **Periodic Notifications**: Reminds you every 15 minutes (after reaching 30 lines) if you have uncommitted/unpushed changes
+- 📈 **Progress Statistics**: Shows your total lines changed, files modified, and session time in notifications
+- 🛡️ **Gentle Persistence**: Non-intrusive reminders that help without interrupting your flow
+
+### Git Integration
+- 📝 **Smart Commit Messages**: Auto-generates commit messages based on your coding statistics
+- ✅ **Quick Push Option**: Push existing commits without additional commits
+- 🔄 **Automatic Git Operations**: Handles `git add`, `git commit`, and `git push` seamlessly
+- 🌿 **Branch Detection**: Automatically detects and pushes to your current branch
+
+### User Control
+- ⚙️ **Enable/Disable Commands**: Toggle PushGuard on/off per workspace
+- 🔄 **Reset Counter**: Reset your coding statistics and start fresh
+- 📊 **Show Stats Command**: View your current coding session statistics anytime
+- ❌ **Skip Options**: Dismiss notifications when you're not ready to commit
+
+### Supported File Types
+- **JavaScript/TypeScript**: `.js`, `.ts`, `.jsx`, `.tsx`
+- **Python**: `.py`
+- **Web Technologies**: `.html`, `.css`, `.scss`, `.less`, `.vue`, `.svelte`
+- **Mobile/Native**: `.swift`, `.kt`, `.java`
+- **Systems Programming**: `.cpp`, `.c`, `.cs`, `.go`, `.rs`
+- **Other Languages**: `.php`, `.rb`
 
 ## 📸 Preview
 
@@ -18,41 +41,76 @@ PushGuard is a lightweight VS Code extension that helps prevent you from acciden
 
 ## ⚙️ Requirements
 
-- Git must be installed and available in your system `PATH`.
-- The workspace must be a Git repository with a valid remote (`origin`) and current branch.
+- Git must be installed and available in your system `PATH`
+- The workspace must be a Git repository with a valid remote (`origin`) and current branch
+- Supported file types for code tracking (see list above)
 
 ## 🧩 Extension Settings
 
-Currently, there are no configurable settings. Future versions may allow:
-
-- Customizing the trigger conditions (on save, on interval, etc.)
-- Enabling/disabling push guard per workspace
+PushGuard includes a configuration setting:
+- `pushGuard.enabled`: Enable/disable PushGuard for the current workspace (default: `true`)
 
 ## 🎯 Usage
 
-1. Make some changes in a Git-tracked project.
-2. Save or run the `PushGuard: Push Now` command from the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
-3. If uncommitted or unpushed changes exist, you'll be prompted to commit and push.
-4. Provide a commit message and confirm.
-5. Your changes will be committed and pushed to the current branch on `origin`.
+### Automatic Tracking
+1. Start coding in any supported file type
+2. PushGuard automatically tracks your line changes and time spent coding
+3. Once you reach 30 lines of changes, you'll get a congratulatory milestone message
+4. After the milestone, PushGuard will check every 15 minutes for uncommitted/unpushed changes
+
+### Manual Commands
+Access these commands via Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`):
+
+- **`PushGuard: Enable`** - Enable PushGuard for current workspace
+- **`PushGuard: Disable`** - Disable PushGuard for current workspace  
+- **`PushGuard: Reset Counter`** - Reset all tracking statistics and start fresh
+- **`PushGuard: Show Stats`** - View current session statistics
+
+### Notification Actions
+When PushGuard detects uncommitted/unpushed changes, you can:
+- **Commit & Push**: Add, commit with a custom message, and push changes
+- **Just Push**: Push existing commits without making new ones
+- **Show Stats**: View detailed statistics about your coding session
+- **Skip This Time**: Dismiss the notification (will remind again in 15 minutes)
+- **Disable Push Guard**: Turn off PushGuard for this workspace
+
+## 🔧 How It Works
+
+1. **Code Monitoring**: PushGuard listens for document changes in supported file types
+2. **Progress Tracking**: Counts line additions, modifications, and tracks files changed
+3. **Milestone Detection**: Activates notifications once you've made substantial progress (30+ lines)
+4. **Periodic Checks**: Every minute, checks for Git status; notifies every 15 minutes if changes exist
+5. **Smart Statistics**: Provides meaningful progress information in all notifications
 
 ## 🐞 Known Issues
 
-- Cannot detect window close/shutdown directly due to VS Code limitations.
-- Only supports the first folder in a multi-root workspace.
-- Currently assumes `origin` as the remote and pushes to the current branch.
+- Cannot detect window close/shutdown directly due to VS Code limitations
+- Line counting considers both additions and modifications as changes
+- Periodic checks run every minute but notifications are limited to 15-minute intervals
+- Currently assumes `origin` as the remote and pushes to the current branch
 
 ## 📦 Release Notes
 
-### 1.0.0
+### 0.0.2
+**Major Feature Release**
+- ✨ **NEW**: Smart code change tracking with line counters
+- ✨ **NEW**: Session time tracking and milestone celebrations  
+- ✨ **NEW**: Progress statistics in all notifications
+- ✨ **NEW**: Support for 15+ programming languages and file types
+- ✨ **NEW**: 30-line milestone system with congratulatory messages
+- ✨ **NEW**: Reset counter and show stats commands
+- 🚀 **IMPROVED**: Smarter notification timing (15-minute intervals)
+- 🚀 **IMPROVED**: Auto-generated commit messages with statistics
+- 🚀 **IMPROVED**: Enhanced user experience with progress tracking
 
+### 0.0.1
 - Initial release of PushGuard
-- Detects uncommitted and unpushed changes
-- Warns user and allows commit + push directly from prompt
+- Basic detection of uncommitted and unpushed changes
+- Simple warning system with commit + push functionality
 
 ## 💡 Contributing
 
-Feel free to open issues or contribute improvements!
+Feel free to open issues or contribute improvements! PushGuard is designed to be lightweight yet powerful, helping developers maintain good Git hygiene without being intrusive.
 
 ## 📚 Resources
 
@@ -61,4 +119,4 @@ Feel free to open issues or contribute improvements!
 
 ---
 
-**Stay safe and never forget to push again with PushGuard!**
+**Code with confidence - PushGuard has your back! 🛡️**

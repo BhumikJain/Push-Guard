@@ -3,7 +3,7 @@
   "name": "push-guard",
   "displayName": "Push Guard",
   "description": "Guards against losing code by reminding users to push before closing VS Code",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "images/icon.png",
   "license": "MIT",
   "engines": {
