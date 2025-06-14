@@ -2,8 +2,8 @@
   "publisher": "BhumikJain",
   "name": "push-guard",
   "displayName": "Push Guard",
-  "description": "Guards against losing code by reminding users to push before closing VS Code",
-  "version": "0.0.2",
+  "description": "Guards against losing code by tracking changes and reminding users to commit and push to Git",
+  "version": "0.0.3",
   "icon": "images/icon.png",
   "license": "MIT",
   "engines": {
@@ -22,35 +22,71 @@
   },
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Push Guard",
+      "properties": {
+        "pushGuard.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable Push Guard for this workspace."
+        },
+        "pushGuard.linesThreshold": {
+          "type": "number",
+          "default": 30,
+          "description": "Number of lines changed to enable notifications."
+        },
+        "pushGuard.notificationInterval": {
+          "type": "number",
+          "default": 15,
+          "description": "Interval in minutes for periodic notifications."
+        },
+        "pushGuard.checkOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for unpushed changes when saving files."
+        },
+        "pushGuard.checkOnSaveInterval": {
+          "type": "number",
+          "default": 5,
+          "description": "Minimum interval in minutes between save-triggered checks to prevent notification spam with auto-save."
+        }
+      }
+    },
     "commands": [
       {
-        "command": "github-push-reminder.checkGitStatus",
-        "title": "Check Git Status and Push to GitHub"
+        "command": "push-guard.disable",
+        "title": "Push Guard: Disable"
       },
       {
-        "command": "github-push-reminder.beforeClose",
-        "title": "Check Git Status Before Closing"
+        "command": "push-guard.enable",
+        "title": "Push Guard: Enable"
+      },
+      {
+        "command": "push-guard.resetCounter",
+        "title": "Push Guard: Reset Counter"
+      },
+      {
+        "command": "push-guard.showStats",
+        "title": "Push Guard: Show Stats"
+      },
+      {
+        "command": "push-guard.commitAndPush",
+        "title": "Push Guard: Commit and Push"
+      },
+      {
+        "command": "push-guard.beforeClose",
+        "title": "Push Guard: Check Before Closing"
       }
     ],
     "keybindings": [
       {
-        "command": "github-push-reminder.beforeClose",
+        "command": "push-guard.beforeClose",
         "key": "alt+f4",
         "win": "alt+f4",
         "mac": "cmd+q",
         "when": "editorTextFocus"
       }
-    ],
-    "configuration": {
-      "title": "GitHub Push Reminder",
-      "properties": {
-        "github-push-reminder.checkOnSave": {
-          "type": "boolean",
-          "default": true,
-          "description": "Check for unpushed changes when saving files (helps detect when VS Code is closing)"
-        }
-      }
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
